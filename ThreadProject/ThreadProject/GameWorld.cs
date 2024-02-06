@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-
 namespace ThreadProject
 {
     public class GameWorld : Game
@@ -11,6 +10,8 @@ namespace ThreadProject
         private SpriteBatch _spriteBatch;
         private static List<GameObject> gameObjects;
         private static List<GameObject> gameObjectsToAdd;
+        private Button chopTreesButton;
+        private SpriteFont testFont;
 
         private static Vector2 screenSize;
         public static Vector2 ScreenSize { get => screenSize; }
@@ -37,9 +38,8 @@ namespace ThreadProject
             gameObjects.Add(new Worker());
             gameObjects.Add(new Gold());
             gameObjects.Add(new Tree());
-            gameObjects.Add(new GameObject());
-
-
+            chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree);
+            gameObjects.Add(chopTreesButton);
 
             base.Initialize();
         }
@@ -47,6 +47,8 @@ namespace ThreadProject
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            chopTreesButton.LoadContent(Content);
 
             foreach (var item in gameObjects)
             {
@@ -61,7 +63,10 @@ namespace ThreadProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            foreach (var item in gameObjects)
+            {
+                item.Update(gameTime);
+            }
 
             base.Update(gameTime);
         }
@@ -70,7 +75,6 @@ namespace ThreadProject
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-
             _spriteBatch.Begin();
 
             foreach (var gameObject in gameObjects)
@@ -78,10 +82,17 @@ namespace ThreadProject
                 gameObject.Draw(_spriteBatch);
             }
 
+            //_spriteBatch.DrawString(testFont, $"ChopTreePosition{chopTreesButton.position}", 0);
+
             _spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+        private void ChopTree()
+        {
+            chopTreesButton.buttonText = "You are chopping trees";
         }
     }
 }

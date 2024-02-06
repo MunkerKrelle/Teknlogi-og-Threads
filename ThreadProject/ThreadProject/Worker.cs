@@ -20,9 +20,8 @@ namespace ThreadProject
         public override void Update(GameTime gameTime)
         {
         }
-        public override void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, position, Color.White); //det virker haha
         }
     }
 }
