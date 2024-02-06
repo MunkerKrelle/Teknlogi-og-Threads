@@ -22,7 +22,7 @@ namespace ThreadProject
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, position, Color.White);
+            spriteBatch.Draw(sprite, position, Color.White); //det virker haha
         }
     }
 }
