@@ -43,7 +43,7 @@ namespace ThreadProject
 
             base.Initialize();
         }
-         // sargon 
+         
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
