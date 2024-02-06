@@ -70,9 +70,11 @@ namespace ThreadProject
             }
         }
 
-        public void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content)
         {
             //buttonSound = content.Load<SoundEffect>("Sound\\questClick");
+
+            font = content.Load<SpriteFont>("File");
 
             sprite = content.Load<Texture2D>("tree-light-green-isaiah658");
 
@@ -130,9 +132,10 @@ namespace ThreadProject
             Vector2 fontLength = font.MeasureString(buttonText);
 
             originText = new Vector2(fontLength.X / 2f, fontLength.Y / 2f);
+            
+            spriteBatch.Draw(sprite, position, null, colorCode, 0, origin, scale, SpriteEffects.None, 1f);
 
-            spriteBatch.Draw(sprite, position, null, colorCode, 0, origin, scale, SpriteEffects.None, 0.98f);
-            spriteBatch.DrawString(font, buttonText, CurrentPosition, Color.Black, 0, originText, 1, SpriteEffects.None, 0.1f);
+            spriteBatch.DrawString(font, buttonText, position, Color.Black, 0, originText, 1, SpriteEffects.None, 0.1f);
             spriteBatch.DrawString(font, $"({mouseState.X},{mouseState.Y})", new Vector2 (100,100), colorCode);
             spriteBatch.DrawString(font, $"{minPosition},{maxPosition}", new Vector2(100, 200), colorCode);
         }

@@ -48,8 +48,6 @@ namespace ThreadProject
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            chopTreesButton.LoadContent(Content);
-
             foreach (var item in gameObjects)
             {
                 item.LoadContent(Content);
@@ -81,8 +79,6 @@ namespace ThreadProject
             {
                 gameObject.Draw(_spriteBatch);
             }
-
-            //_spriteBatch.DrawString(testFont, $"ChopTreePosition{chopTreesButton.position}", 0);
 
             _spriteBatch.End();
             // TODO: Add your drawing code here

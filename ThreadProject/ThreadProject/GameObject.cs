@@ -12,19 +12,20 @@ namespace ThreadProject
         protected Texture2D sprite;
         private Texture2D background;
         protected SpriteFont font;
-        protected float scale;
+        protected float scale = 1;
         private Vector2 backgroundScale;
         protected Vector2 origin;
         private Texture2D mine;
         private Vector2 mineScale;
 
-        protected Vector2 CurrentPosition
+        private Texture2D CurrentSprite
         {
             get
             {
-                return new Vector2(position.X + (sprite.Width * scale/2), position.Y + (sprite.Height * scale/2));
+                return sprite;
             }
         }
+
         public virtual void LoadContent(ContentManager content)
         {
             //sprite = content.Load<Texture2D>("dwarven home");
