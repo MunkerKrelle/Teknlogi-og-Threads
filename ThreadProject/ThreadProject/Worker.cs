@@ -32,6 +32,8 @@ namespace ThreadProject
             get { return workerCost; }
             set { workerCost = value; }
         }
+
+
         public Worker()
         {
             //position = new Vector2(0, 0);
