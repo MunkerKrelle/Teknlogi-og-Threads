@@ -18,14 +18,11 @@ namespace ThreadProject
         private Texture2D mine;
         private Vector2 mineScale;
 
-        private Texture2D CurrentSprite
+        public Vector2 Position
         {
-            get
-            {
-                return sprite;
-            }
+            get { return position; }
+            set { position = value; }
         }
-
         public virtual void LoadContent(ContentManager content)
         {
             //sprite = content.Load<Texture2D>("dwarven home");
