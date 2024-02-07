@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -31,6 +32,7 @@ namespace ThreadProject
         public UI_Manager()
         {
             uiThread = new Thread(() => ThreadGold());
+            uiThread.IsBackground = true;
         }
 
         public void ThreadGold()

@@ -15,6 +15,7 @@ namespace ThreadProject
         private static List<GameObject> gameObjectsToAdd;
         private Button chopTreesButton;
         private SpriteFont testFont;
+        private UI_Manager myUIManager;
 
         public static MouseState mouseState;
 
@@ -59,6 +60,9 @@ namespace ThreadProject
            // gameObjects.Add(new Tree());
             gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
 
+            myUIManager = new UI_Manager();
+            myUIManager.Start();
+
             base.Initialize();
         }
          
@@ -70,6 +74,8 @@ namespace ThreadProject
             {
                 item.LoadContent(Content);
             }
+
+            myUIManager.LoadContent(Content);
             // TODO: use this.Content to load your game content here
         }
 
@@ -108,6 +114,7 @@ namespace ThreadProject
                 purchaseCoolDown = false;
             }
 
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -123,6 +130,8 @@ namespace ThreadProject
             {
                 gameObject.Draw(_spriteBatch);
             }
+
+            myUIManager.DrawGold(_spriteBatch);
 
             _spriteBatch.End();
             // TODO: Add your drawing code here
