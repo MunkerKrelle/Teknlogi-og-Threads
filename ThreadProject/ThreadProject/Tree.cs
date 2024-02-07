@@ -34,8 +34,16 @@ namespace ThreadProject
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(trees[0], position, null, Color.White, 0, origin, 1f, SpriteEffects.None, 1f);
-            spriteBatch.Draw(trees[1], position, null, Color.White, 0, origin, 1f, SpriteEffects.None, 1f);
+            //spriteBatch.Draw(trees[0], new Vector2(300, 700), Color.White);
+            //spriteBatch.Draw(trees[1], new Vector2(400, 700), Color.White);
+
+            for (int i = 0; i < 10; i++)
+            {
+                spriteBatch.Draw(trees[0], position, Color.White);
+                spriteBatch.Draw(trees[1], position, Color.White);
+                //position.X = rnd.Next(10, 200);
+                //position.Y = rnd.Next(600, 800);
+            }
         }
     }
 }

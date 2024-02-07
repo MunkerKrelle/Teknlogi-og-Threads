@@ -42,11 +42,7 @@
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-<<<<<<< HEAD
 /build:File.spritefont
-=======
-/build:File.spritefont;TestFont.spritefont
->>>>>>> main
 
 #begin Gold.png
 /importer:TextureImporter
