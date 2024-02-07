@@ -27,7 +27,7 @@ namespace ThreadProject
         private bool purchaseCoolDown = false;
         private float timeElapsed;
         public static float DeltaTime;
-        private int goldAmount = 500; //temp variable untill jeppe is done
+        //private int goldAmount = 500; //temp variable untill jeppe is done
         
 
         static readonly object lockObject = new object();
@@ -62,7 +62,7 @@ namespace ThreadProject
             gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
 
             myUIManager = new UI_Manager();
-            myUIManager.Start();
+            //myUIManager.Start();
 
             base.Initialize();
         }
@@ -84,7 +84,7 @@ namespace ThreadProject
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            
             
             DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             timeElapsed += DeltaTime;
@@ -100,12 +100,12 @@ namespace ThreadProject
                 gameObject.Update(gameTime);
             }
 
-            if (keyState.IsKeyDown(Keys.G) && purchaseCoolDown == false && goldAmount >= Worker.workerCost)
+            if (keyState.IsKeyDown(Keys.G) && purchaseCoolDown == false && UI_Manager.goldAmount >= Worker.workerCost)
             {
                 Thread WorkerThread = new Thread(BuyWorker);
                 WorkerThread.IsBackground = true;
                 WorkerThread.Start();
-                goldAmount -= 100;
+                //UI_Manager.goldAmount -= Worker.workerCost;
                 purchaseCoolDown = true;
                 timeElapsed = 0;
             }
@@ -115,7 +115,23 @@ namespace ThreadProject
                 purchaseCoolDown = false;
             }
 
+            if (keyState.IsKeyDown(Keys.Q))
+            {
+                UI_Manager.goldAmount += 10;
+            }
+            else if (keyState.IsKeyDown(Keys.B))
+            {
+                UI_Manager.goldAmount -= 10;
+            }
 
+            if (keyState.IsKeyDown(Keys.W))
+            {
+                UI_Manager.woodAmount += 10;
+            }
+            else if (keyState.IsKeyDown(Keys.L))
+            {
+                UI_Manager.woodAmount -= 10;
+            }
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -179,7 +195,7 @@ namespace ThreadProject
             workerArray[workerCount] = new Worker();
             workerArray[workerCount].Position = new Vector2(mouseState.Position.X, mouseState.Position.Y);
             InstantiateGameObject(workerArray[workerCount]);
-            workerArray[workerCount].ThreadTesting(lockObject);
+            workerArray[workerCount].GoldLocking(lockObject);
             workerCount++; // maybe sync criticall area?
         }
 
