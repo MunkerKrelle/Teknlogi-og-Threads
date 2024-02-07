@@ -14,6 +14,7 @@ namespace ThreadProject
         private static List<GameObject> gameObjects;
         private static List<GameObject> gameObjectsToAdd;
         private Button chopTreesButton;
+
         private SpriteFont testFont;
         private UI_Manager myUIManager;
 
@@ -27,6 +28,7 @@ namespace ThreadProject
         private float timeElapsed;
         public static float DeltaTime;
         private int goldAmount = 500; //temp variable untill jeppe is done
+        
 
         static readonly object lockObject = new object();
 
@@ -57,7 +59,6 @@ namespace ThreadProject
             gameObjects = new List<GameObject>();
            // gameObjects.Add(new Worker()); //all this is an instance.
             gameObjects.Add(new Gold());
-           // gameObjects.Add(new Tree());
             gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
 
             myUIManager = new UI_Manager();
@@ -131,7 +132,7 @@ namespace ThreadProject
                 gameObject.Draw(_spriteBatch);
             }
 
-            myUIManager.DrawGold(_spriteBatch);
+            myUIManager.DrawResource(_spriteBatch);
 
             _spriteBatch.End();
             // TODO: Add your drawing code here

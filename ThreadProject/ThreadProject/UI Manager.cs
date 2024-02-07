@@ -8,29 +8,27 @@ namespace ThreadProject
 {
     internal class UI_Manager
     {
-        private int goldAmount;
-        private int woodAmount;
+        private int goldAmount = 50;
+        private int woodAmount = 50;
         private int workerPrice;
         private int warriorPrice;
         private Texture2D goldSprite;
         private Texture2D woodSprite;
         private SpriteFont uiFont;
-        Thread uiThread;
-
-
-        public int GoldAmount
-        {
-            get { return goldAmount; }
-            set { goldAmount = value; }
-        }
+        private Vector2 woodScale;
+        Thread goldThread;
+        Thread woodThread;
 
         public UI_Manager()
         {
-            uiThread = new Thread(() => ThreadGold());
-            uiThread.IsBackground = true;
+            goldThread = new Thread(() => ThreadGold());
+            goldThread.IsBackground = true;
+            woodThread = new Thread(() => ThreadWood());
+            woodThread.IsBackground = true;
+            woodScale = new Vector2(0.1f);
         }
 
-        public void ThreadGold()
+        private void ThreadGold()
         {
             while (true)
             {
@@ -47,6 +45,25 @@ namespace ThreadProject
             }
         }
 
+        private void ThreadWood()
+        {
+            while (true)
+            {
+                KeyboardState keyState = Keyboard.GetState();
+
+                if (keyState.IsKeyDown(Keys.W))
+                {
+                    woodAmount += 10;
+                }
+                else if (keyState.IsKeyDown(Keys.L))
+                {
+                    woodAmount -= 10;
+                }
+            }
+        }
+
+        
+
         public void LoadContent(ContentManager content)
         {
             goldSprite = content.Load<Texture2D>("Gold");
@@ -55,15 +72,18 @@ namespace ThreadProject
             uiFont = content.Load<SpriteFont>("File");
         }
 
-        public void DrawGold(SpriteBatch spriteBatch)
+        public void DrawResource(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(goldSprite, new Vector2(30, 850), Color.White);
             spriteBatch.DrawString(uiFont, "" + goldAmount, new Vector2(70, 880), Color.White);
+            spriteBatch.Draw(woodSprite, new Vector2(110, 850), null, Color.White, 0, new Vector2(0, 0), woodScale, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(uiFont, "" + woodAmount, new Vector2(150, 880), Color.White);
         }
-
+        
         public void Start()
         {
-            uiThread.Start();
+            goldThread.Start();
+            woodThread.Start();
         }
     }
 }
