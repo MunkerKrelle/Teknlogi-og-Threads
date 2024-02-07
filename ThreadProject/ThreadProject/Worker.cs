@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.MediaFoundation;
 using static ThreadProject.Button;
 using System.Drawing.Imaging;
 using System.Threading;
@@ -22,8 +21,8 @@ namespace ThreadProject
         private int moveSpeed = 5;
         private int workSpeed = 1;
         private int workerLevel = 1;
-        static public int workerCost = 100;
-        static private int test;
+        static public int workerCost = 10;
+        static private int testLock;
         private Texture2D gold;
 
         public int WorkerCost
@@ -125,6 +124,7 @@ namespace ThreadProject
         public void ChopWood()
         {
             structure = new Vector2(1500, 500);
+            WoodLocking(testLock);
         }
 
         public void MineGold()
@@ -138,11 +138,20 @@ namespace ThreadProject
             position += directionMove * speed;
         }
 
-        public void ThreadTesting(object ob)
+        public void GoldLocking(object ob)
         {
             lock (ob)
             {
-                test++;
+                UI_Manager.goldAmount -= workerCost;
+                //testLock++;
+            }
+        }
+        public void WoodLocking(object ob)
+        {
+            lock (ob)
+            {
+                UI_Manager.woodAmount += 20;
+                //testLock++;
             }
         }
     }
