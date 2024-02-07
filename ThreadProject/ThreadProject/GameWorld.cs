@@ -11,6 +11,7 @@ namespace ThreadProject
         private SpriteBatch _spriteBatch;
         private static List<GameObject> gameObjects;
         private static List<GameObject> gameObjectsToAdd;
+        private UI_Manager myUIManager;
 
         private static Vector2 screenSize;
         public static Vector2 ScreenSize { get => screenSize; }
@@ -25,7 +26,6 @@ namespace ThreadProject
             _graphics.PreferredBackBufferHeight = 900;
 
             screenSize = new Vector2(_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
-
         }
 
         protected override void Initialize()
@@ -39,7 +39,8 @@ namespace ThreadProject
             gameObjects.Add(new Tree());
             gameObjects.Add(new GameObject());
 
-
+            myUIManager = new UI_Manager();
+            myUIManager.Start();
 
             base.Initialize();
         }
@@ -53,6 +54,8 @@ namespace ThreadProject
                 item.LoadContent(Content);
             }
 
+            myUIManager.LoadContent(Content);
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -61,7 +64,11 @@ namespace ThreadProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            KeyboardState keyState = Keyboard.GetState();
+
+                // TODO: Add your update logic here
+
+                //myUIManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -78,10 +85,13 @@ namespace ThreadProject
                 gameObject.Draw(_spriteBatch);
             }
 
+            myUIManager.DrawGold(_spriteBatch);
+
             _spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
+
     }
 }
