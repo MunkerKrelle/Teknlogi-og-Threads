@@ -27,6 +27,7 @@ namespace ThreadProject
         private float timeElapsed;
         public static float DeltaTime;
         private int goldAmount = 500; //temp variable untill jeppe is done
+        
 
         static readonly object lockObject = new object();
 
@@ -131,7 +132,7 @@ namespace ThreadProject
                 gameObject.Draw(_spriteBatch);
             }
 
-            myUIManager.DrawGold(_spriteBatch);
+            myUIManager.DrawResource(_spriteBatch);
 
             _spriteBatch.End();
             // TODO: Add your drawing code here
