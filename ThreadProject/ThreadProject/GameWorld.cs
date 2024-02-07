@@ -195,7 +195,8 @@ namespace ThreadProject
             workerArray[workerCount] = new Worker();
             workerArray[workerCount].Position = new Vector2(mouseState.Position.X, mouseState.Position.Y);
             InstantiateGameObject(workerArray[workerCount]);
-            workerArray[workerCount].GoldLocking(lockObject);
+            workerArray[workerCount].Working(lockObject);
+            //workerArray[workerCount].GoldLocking(lockObject);
             workerCount++; // maybe sync criticall area?
         }
 

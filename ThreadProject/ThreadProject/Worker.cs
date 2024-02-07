@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using static ThreadProject.Button;
 using System.Drawing.Imaging;
+using System.Threading;
 
 namespace ThreadProject
 {
@@ -23,6 +24,8 @@ namespace ThreadProject
         static public int workerCost = 10;
         static private int testLock;
         private Texture2D gold;
+        private bool idle;
+        private string profession;
 
         public int WorkerCost
         {
@@ -154,22 +157,34 @@ namespace ThreadProject
 
         public void Working(object ob)
         {
-            while (true) { 
-
-            while (bool)
+            while (true)
             {
 
-            }
-
-            while (moving) { }
-
-            sleep
-
-             while
-
-                    gold++
+                while (idle)
+                {
+                    Thread.Sleep(100);
                 }
 
+                if (profession == "WoodCutting")
+                {
+                    structure = new Vector2(1500, 500);
+                }
+                else if (profession == "GoldMining")
+                {
+                    structure = new Vector2(1500, 100);
+                }
+
+                while (position != structure)
+                {
+                    Move(structure);
+                }
+
+                Thread.Sleep(100); //Indsæt Enter Function
+
+                while (position != new Vector2(0, 0))
+                {
+                    Move(new Vector2(0, 0));
+                }
             }
         }
     }
