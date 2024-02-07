@@ -56,7 +56,7 @@ namespace ThreadProject
             gameObjects = new List<GameObject>();
            // gameObjects.Add(new Worker()); //all this is an instance.
             gameObjects.Add(new Gold());
-            gameObjects.Add(new Tree());
+           // gameObjects.Add(new Tree());
             gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
 
             base.Initialize();

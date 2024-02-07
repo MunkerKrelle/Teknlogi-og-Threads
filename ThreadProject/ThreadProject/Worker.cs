@@ -15,12 +15,7 @@ namespace ThreadProject
         private float speed;
         private Vector2 structure = new Vector2 (1000, 1000);
 
-        public Worker()
-        {
-            position = new Vector2(0, 0);
-            scale = 3;
-            speed = 2;
-        }
+     
 
         private int moveSpeed = 5;
         private int workSpeed = 1;
@@ -34,13 +29,12 @@ namespace ThreadProject
             get { return workerCost; }
             set { workerCost = value; }
         }
-
-        public Worker() 
+        public Worker()
         {
-           
-            //position = new Vector2(position.X, position.Y);
-            Position = new Vector2(GameWorld.mouseState.Position.X, GameWorld.mouseState.Position.Y);
-            //position = new Vector2(300, 300);
+            //position = new Vector2(0, 0);
+            position = new Vector2(GameWorld.mouseState.Position.X, GameWorld.mouseState.Position.Y);
+            scale = 3;
+            speed = 2;
         }
 
         public override void LoadContent(ContentManager content)
