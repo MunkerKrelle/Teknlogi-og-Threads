@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-
 namespace ThreadProject
 { 
     public class GameWorld : Game
@@ -11,6 +10,8 @@ namespace ThreadProject
         private SpriteBatch _spriteBatch;
         private static List<GameObject> gameObjects;
         private static List<GameObject> gameObjectsToAdd;
+        private Button chopTreesButton;
+        private SpriteFont testFont;
 
         private static Vector2 screenSize;
         public static Vector2 ScreenSize { get => screenSize; }
@@ -37,9 +38,7 @@ namespace ThreadProject
             gameObjects.Add(new Worker());
             gameObjects.Add(new Gold());
             gameObjects.Add(new Tree());
-            gameObjects.Add(new GameObject());
-
-
+            gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
 
             base.Initialize();
         }
@@ -61,7 +60,10 @@ namespace ThreadProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            foreach (var item in gameObjects)
+            {
+                item.Update(gameTime);
+            }
 
             base.Update(gameTime);
         }
@@ -69,7 +71,6 @@ namespace ThreadProject
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
 
             _spriteBatch.Begin();
 
@@ -82,6 +83,11 @@ namespace ThreadProject
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+        private void ChopTree()
+        {
+            chopTreesButton.buttonText = "You are chopping trees";
         }
     }
 }
