@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Threading.Tasks;
 
@@ -17,6 +18,14 @@ namespace ThreadProject
         protected Vector2 origin;
         private Texture2D mine;
         private Vector2 mineScale;
+        
+        protected Color colorCode = Color.White;
+        protected Vector2 minPosition;
+        protected Vector2 maxPosition;
+
+        public MouseState mouseState;
+        public MouseState newState;
+        protected bool active;
 
         public Vector2 Position
         {
@@ -45,7 +54,7 @@ namespace ThreadProject
         {
             origin = new Vector2(sprite.Width/2, sprite.Height/2);
 
-            spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, scale, SpriteEffects.None, 1f);
+            spriteBatch.Draw(sprite, position, null, colorCode, 0, origin, scale, SpriteEffects.None, 1f);
             //spriteBatch.Draw(mine, new Vector2(1250,550), null, Color.White, 0, origin, mineScale, SpriteEffects.None, 1f);
             //spriteBatch.Draw(background, position, null, Color.White, 0, new Vector2(0, 0), backgroundScale, SpriteEffects.None, 1f);
         }

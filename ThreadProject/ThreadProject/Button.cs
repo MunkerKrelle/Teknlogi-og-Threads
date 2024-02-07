@@ -10,18 +10,11 @@ namespace ThreadProject
 {
     internal class Button : GameObject
     {
-        private Vector2 minPosition;
-        private Vector2 maxPosition;
         private Rectangle rectangleForButtons;
-        private Color colorCode = Color.White;
         private Vector2 originText;
-        public bool active = true;
         public delegate void ButtonFunction();
         public ButtonFunction buttonFunction;
         private SoundEffect buttonSound;
-
-        public MouseState mouseState;
-        public MouseState newState;
 
         public string buttonText;
         public string currentButtonText;
@@ -53,7 +46,8 @@ namespace ThreadProject
             this.buttonText = buttonText;
             this.buttonFunction = buttonFunction;
             currentButtonText = buttonText;
-        }
+            active = true;
+    }
 
         public override void Update(GameTime gameTime)
         {
