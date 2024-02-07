@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using SharpDX.MediaFoundation;
 using static ThreadProject.Button;
 using System.Drawing.Imaging;
+using System.Threading;
 
 namespace ThreadProject
 {
@@ -30,6 +31,8 @@ namespace ThreadProject
             get { return workerCost; }
             set { workerCost = value; }
         }
+
+
         public Worker()
         {
             //position = new Vector2(0, 0);
