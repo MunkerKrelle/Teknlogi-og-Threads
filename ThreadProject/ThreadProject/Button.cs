@@ -132,7 +132,9 @@ namespace ThreadProject
             Vector2 fontLength = font.MeasureString(buttonText);
 
             originText = new Vector2(fontLength.X / 2f, fontLength.Y / 2f);
-            
+
+            origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+
             spriteBatch.Draw(sprite, position, null, colorCode, 0, origin, scale, SpriteEffects.None, 1f);
 
             spriteBatch.DrawString(font, buttonText, position, Color.Black, 0, originText, 1, SpriteEffects.None, 0.1f);

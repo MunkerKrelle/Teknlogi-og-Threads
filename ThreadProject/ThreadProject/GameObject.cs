@@ -46,6 +46,8 @@ namespace ThreadProject
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            origin = new Vector2(sprite.Width/2, sprite.Height/2);
+
             spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, scale, SpriteEffects.None, 1f);
             //spriteBatch.Draw(mine, new Vector2(1250,550), null, Color.White, 0, origin, mineScale, SpriteEffects.None, 1f);
             //spriteBatch.Draw(background, position, null, Color.White, 0, new Vector2(0, 0), backgroundScale, SpriteEffects.None, 1f);

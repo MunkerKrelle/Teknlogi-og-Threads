@@ -38,8 +38,7 @@ namespace ThreadProject
             gameObjects.Add(new Worker());
             gameObjects.Add(new Gold());
             gameObjects.Add(new Tree());
-            chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree);
-            gameObjects.Add(chopTreesButton);
+            gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
 
             base.Initialize();
         }
