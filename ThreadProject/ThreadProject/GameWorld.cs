@@ -14,6 +14,7 @@ namespace ThreadProject
         private static List<GameObject> gameObjects;
         private static List<GameObject> gameObjectsToAdd;
         private Button chopTreesButton;
+
         private SpriteFont testFont;
         private UI_Manager myUIManager;
 
@@ -58,7 +59,6 @@ namespace ThreadProject
             gameObjects = new List<GameObject>();
            // gameObjects.Add(new Worker()); //all this is an instance.
             gameObjects.Add(new Gold());
-           // gameObjects.Add(new Tree());
             gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
 
             myUIManager = new UI_Manager();

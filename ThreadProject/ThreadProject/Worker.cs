@@ -7,22 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.MediaFoundation;
+using static ThreadProject.Button;
+using System.Drawing.Imaging;
 
 namespace ThreadProject
 {
     internal class Worker : GameObject
     {
         private float speed;
-        private Vector2 structure = new Vector2 (1000, 1000);
-
-     
+        private Vector2 structure;
 
         private int moveSpeed = 5;
         private int workSpeed = 1;
         private int workerLevel = 1;
         static public int workerCost = 100;
         static private int test;
-
+        private Texture2D gold;
 
         public int WorkerCost
         {
@@ -35,12 +36,58 @@ namespace ThreadProject
             position = new Vector2(GameWorld.mouseState.Position.X, GameWorld.mouseState.Position.Y);
             scale = 3;
             speed = 2;
+            active = true;
         }
 
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("dwarf-male-base");
-            
+            gold = content.Load<Texture2D>("Gold");
+            //rectangleForButtons = new Rectangle((int)position.X, (int)position.Y, sprite.Width / 2, sprite.Height / 2);
+
+            PositionUpdate();
+        }
+
+        /// <summary>
+        /// Updates the position of the buandries of the button - where the button can be clicked
+        /// </summary>
+        public void PositionUpdate()
+        {
+            minPosition.X = position.X - (sprite.Width / 4);
+            minPosition.Y = position.Y - (sprite.Height / 4);
+            maxPosition.X = position.X + (sprite.Width * scale / 4);
+            maxPosition.Y = position.Y + (sprite.Height * scale / 4);
+        }
+
+        /// <summary>
+        /// Checks if the cursor is on an object and turns it gray 
+        /// </summary>
+        public void MouseOnButton()
+        {
+
+            if (mouseState.X > minPosition.X && mouseState.Y > minPosition.Y && mouseState.X < maxPosition.X && mouseState.Y < maxPosition.Y)
+            {
+                colorCode = Color.LightGray;
+            }
+            else
+            {
+                colorCode = Color.White;
+            }
+        }
+
+        /// <summary>
+        /// Checks if the mouse is pressed on a pressabled object
+        /// </summary>
+        public void MousePressed()
+        {
+            if (!active)
+            {
+                return;
+            }
+            if (mouseState.X > minPosition.X && mouseState.Y > minPosition.Y && mouseState.X < maxPosition.X && mouseState.Y < maxPosition.Y)
+            {
+                ChopWood();
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -51,15 +98,38 @@ namespace ThreadProject
             position.X = random1.Next(100, 400);
             position.Y = random2.Next(100, 400);*/
             //position.Y++;
-            
+
             //mouseState.Position.X; 
             //mouseState.Position.Y
             //position = new Vector2(GameWorld.mouseState.Position.X, GameWorld.mouseState.Position.Y);
 
-            Move();
+            PositionUpdate();
+            MouseOnButton();
+            mouseState = Mouse.GetState();
+
+            if (active)
+            {
+                if (mouseState.LeftButton == ButtonState.Released && newState.LeftButton == ButtonState.Pressed)
+                {
+                    MousePressed();
+                }
+                newState = mouseState;
+            }
+
+            Move(structure);
         }
 
-        public void Move()
+        public void ChopWood()
+        {
+            structure = new Vector2(1500, 500);
+        }
+
+        public void MineGold()
+        {
+            structure = new Vector2(1500, 100);
+        }
+
+        public void Move(Vector2 struturePos)
         {
             Vector2 directionMove = Vector2.Normalize(structure - position); //Vi normalizer vectoren fordi eller ville bulleten bevæge sig hurtigere, når den bevæger sig skråt
             position += directionMove * speed;
@@ -67,9 +137,9 @@ namespace ThreadProject
 
         public void ThreadTesting(object ob)
         {
-            lock (ob) 
+            lock (ob)
             {
-            test++;
+                test++;
             }
         }
     }
