@@ -12,6 +12,16 @@ namespace ThreadProject
 {
     internal class Worker : GameObject
     {
+        private float speed;
+        private Vector2 structure = new Vector2 (1000, 1000);
+
+        public Worker()
+        {
+            position = new Vector2(0, 0);
+            scale = 3;
+            speed = 2;
+        }
+
         private int moveSpeed = 5;
         private int workSpeed = 1;
         private int workerLevel = 1;
@@ -52,10 +62,13 @@ namespace ThreadProject
             //mouseState.Position.Y
             //position = new Vector2(GameWorld.mouseState.Position.X, GameWorld.mouseState.Position.Y);
 
+            Move();
         }
-        public override void Draw(SpriteBatch spriteBatch)
+
+        public void Move()
         {
-                spriteBatch.Draw(sprite, Position, Color.White);
+            Vector2 directionMove = Vector2.Normalize(structure - position); //Vi normalizer vectoren fordi eller ville bulleten bevæge sig hurtigere, når den bevæger sig skråt
+            position += directionMove * speed;
         }
 
         public void ThreadTesting(object ob)

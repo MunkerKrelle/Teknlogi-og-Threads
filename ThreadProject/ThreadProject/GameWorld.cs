@@ -13,6 +13,8 @@ namespace ThreadProject
         private SpriteBatch _spriteBatch;
         private static List<GameObject> gameObjects;
         private static List<GameObject> gameObjectsToAdd;
+        private Button chopTreesButton;
+        private SpriteFont testFont;
 
         public static MouseState mouseState;
 
@@ -55,11 +57,11 @@ namespace ThreadProject
            // gameObjects.Add(new Worker()); //all this is an instance.
             gameObjects.Add(new Gold());
             gameObjects.Add(new Tree());
-            gameObjects.Add(new GameObject());
+            gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
 
             base.Initialize();
         }
-         // sargon 
+         
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -115,7 +117,6 @@ namespace ThreadProject
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-
             _spriteBatch.Begin();
 
             foreach (var gameObject in gameObjects)
@@ -170,6 +171,11 @@ namespace ThreadProject
             InstantiateGameObject(workerArray[workerCount]);
             workerArray[workerCount].ThreadTesting(lockObject);
             workerCount++; // maybe sync criticall area?
+        }
+
+        private void ChopTree()
+        {
+            chopTreesButton.buttonText = "You are chopping trees";
         }
     }
 }
