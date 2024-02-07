@@ -24,6 +24,8 @@ namespace ThreadProject
         static public int workerCost = 10;
         static private int testLock;
         private Texture2D gold;
+        private bool idle = true;
+        private string profession;
 
         public int WorkerCost
         {
@@ -37,7 +39,7 @@ namespace ThreadProject
             //position = new Vector2(0, 0);
             position = new Vector2(GameWorld.mouseState.Position.X, GameWorld.mouseState.Position.Y);
             scale = 3;
-            speed = 2;
+            speed = 0.00007f;
             active = true;
         }
 
@@ -88,7 +90,7 @@ namespace ThreadProject
             }
             if (mouseState.X > minPosition.X && mouseState.Y > minPosition.Y && mouseState.X < maxPosition.X && mouseState.Y < maxPosition.Y)
             {
-                ChopWood();
+                JobAcquired();
             }
         }
 
@@ -117,8 +119,6 @@ namespace ThreadProject
                 }
                 newState = mouseState;
             }
-
-            Move(structure);
         }
 
         public void ChopWood()
@@ -132,9 +132,9 @@ namespace ThreadProject
             structure = new Vector2(1500, 100);
         }
 
-        public void Move(Vector2 struturePos)
+        public void Move(Vector2 structurePos)
         {
-            Vector2 directionMove = Vector2.Normalize(structure - position); //Vi normalizer vectoren fordi eller ville bulleten bevæge sig hurtigere, når den bevæger sig skråt
+            Vector2 directionMove = Vector2.Normalize(structurePos - position); //Vi normalizer vectoren fordi eller ville bulleten bevæge sig hurtigere, når den bevæger sig skråt
             position += directionMove * speed;
         }
 
@@ -152,6 +152,47 @@ namespace ThreadProject
             {
                 UI_Manager.woodAmount += 20;
                 //testLock++;
+            }
+        }
+
+        public void JobAcquired()
+        {
+            profession = "WoodCutting";
+            idle = false;
+        }
+
+        public void Working(object ob)
+        {
+            while (true)
+            {
+                while (idle)
+                {
+                    Thread.Sleep(100);
+                }
+
+                if (profession == "WoodCutting")
+                {
+                    structure = new Vector2(1500, 500);
+                }
+                else if (profession == "GoldMining")
+                {
+                    structure = new Vector2(1500, 100);
+                }
+
+                while (position != structure)
+                {
+                    Move(structure);
+                }
+
+                Structures.Enter();
+
+                structure = new Vector2(10, 10);
+
+                while (position != structure)
+                {
+                    Move(structure);
+                }
+                int i = 5;
             }
         }
     }
