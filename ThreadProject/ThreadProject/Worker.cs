@@ -139,8 +139,28 @@ namespace ThreadProject
         {
             lock (ob)
             {
-                test++;
+
             }
+        }
+
+        public void Working(object ob)
+        {
+            while (true) { 
+
+            while (bool)
+            {
+
+            }
+
+            while (moving) { }
+
+            sleep
+
+             while
+
+                    gold++
+                }
+
         }
     }
 }
