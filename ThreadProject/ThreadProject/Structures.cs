@@ -7,17 +7,7 @@ namespace ThreadProject
     {
         static Semaphore MySemaphore = new Semaphore(1, 5);
 
-        static void main() 
-        {
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    new Thread(Enter(position)).Start(i);
-            //}
-            Thread.Sleep(500);
-            MySemaphore.Release(1);
-        }
-
-        static void Enter(Vector2 workerPos)
+        static public void Enter()
         {
             MySemaphore.WaitOne();
             Thread.Sleep(5000);
