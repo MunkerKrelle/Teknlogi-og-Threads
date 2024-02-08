@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Web;
 
 namespace ThreadProject
 { 
@@ -30,7 +31,8 @@ namespace ThreadProject
         //private int goldAmount = 500; //temp variable untill jeppe is done
         
 
-        static readonly object lockObject = new object();
+        static readonly object lockObjectGold = new object();
+        static public readonly object lockObjectWood = new object();
 
         public int WorkerCount
         {
@@ -133,6 +135,11 @@ namespace ThreadProject
             {
                 UI_Manager.woodAmount -= 10;
             }
+            if (keyState.IsKeyDown (Keys.R))
+            {
+                Structures.level = 2;
+
+            }
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -196,9 +203,8 @@ namespace ThreadProject
             workerArray[workerCount] = new Worker();
             workerArray[workerCount].Position = new Vector2(mouseState.Position.X, mouseState.Position.Y);
             InstantiateGameObject(workerArray[workerCount]);
-            workerArray[workerCount].GoldLocking(lockObject);
-            workerArray[workerCount].Working(lockObject);
-            
+            workerArray[workerCount].GoldLocking(lockObjectGold);
+            workerArray[workerCount].Working(lockObjectGold);
             workerCount++; // maybe sync criticall area?
         }
 
