@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Web;
 
 namespace ThreadProject
 { 
@@ -60,6 +61,7 @@ namespace ThreadProject
             gameObjects = new List<GameObject>();
            // gameObjects.Add(new Worker()); //all this is an instance.
             gameObjects.Add(new Gold());
+            gameObjects.Add(new TownHall());
             gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
 
             myUIManager = new UI_Manager();
@@ -132,6 +134,11 @@ namespace ThreadProject
             else if (keyState.IsKeyDown(Keys.L))
             {
                 UI_Manager.woodAmount -= 10;
+            }
+            if (keyState.IsKeyDown (Keys.R))
+            {
+                Structures.level = 2;
+
             }
             // TODO: Add your update logic here
 
