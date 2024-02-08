@@ -155,11 +155,11 @@ namespace ThreadProject
                 //testLock++;
             }
         }
-        public void WoodLocking(object ob)
+        static public void WoodLocking(object ob)
         {
             lock (ob)
             {
-                UI_Manager.woodAmount += 20;
+                UI_Manager.woodAmount -= 50;
                 //testLock++;
             }
         }
@@ -189,7 +189,7 @@ namespace ThreadProject
             GameWorld.InstantiateGameObject(job[1] = new Button(new Vector2(position.X, position.Y + 50), "Chop Wood", WoodCutting));
         }
 
-        public void Working(object ob)
+        public void Working()
         {
             while (true)
             {
@@ -219,7 +219,7 @@ namespace ThreadProject
                         atWorkStructure = true;
                         if (profession == "GoldMining")
                         {
-                            Structures.Enter();
+                            Structure.Enter();
                             structure = new Vector2(250, GameWorld.ScreenSize.Y / 2 + 50);
                         }
                         else if (profession == "WoodCutting") 
