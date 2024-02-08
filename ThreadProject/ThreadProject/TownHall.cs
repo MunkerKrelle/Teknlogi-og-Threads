@@ -131,7 +131,7 @@ namespace ThreadProject
             buildWorker[0].Position = new Vector2(-500, -500);
             buildWorker[1].Position = new Vector2(-500, -500);
 
-            Structures.UpgradeMine();
+            Structure.UpgradeMine();
 
             active = true;
         }

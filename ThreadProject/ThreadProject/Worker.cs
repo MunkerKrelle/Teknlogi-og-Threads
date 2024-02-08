@@ -194,12 +194,12 @@ namespace ThreadProject
                         if (profession == "GoldMining")
                         {
                             Structures.Enter();
-                            structure = new Vector2(700, 600);
+                            structure = new Vector2(250, GameWorld.ScreenSize.Y / 2 + 50);
                         }
                         else if (profession == "WoodCutting") 
                         {
                             Thread.Sleep(5000);
-                            structure = new Vector2(700, 600);
+                            structure = new Vector2(250, GameWorld.ScreenSize.Y / 2 + 50);
                         }
                     }
                 }

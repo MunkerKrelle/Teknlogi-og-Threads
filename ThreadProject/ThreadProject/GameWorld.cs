@@ -62,7 +62,6 @@ namespace ThreadProject
            // gameObjects.Add(new Worker()); //all this is an instance.
             gameObjects.Add(new Gold());
             gameObjects.Add(new TownHall());
-            gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
             gameObjects.Add(new Tree());
             myUIManager = new UI_Manager();
             //myUIManager.Start();
@@ -104,46 +103,6 @@ namespace ThreadProject
             {
                 gameObject.Update(gameTime);
             }
-
-            if (keyState.IsKeyDown(Keys.G) && purchaseCoolDown == false && UI_Manager.goldAmount >= Worker.workerCost)
-            {
-                Thread WorkerThread = new Thread(BuyWorker);
-                WorkerThread.IsBackground = true;
-                WorkerThread.Start();
-                //UI_Manager.goldAmount -= Worker.workerCost;
-                purchaseCoolDown = true;
-                timeElapsed = 0;
-            }
-           
-            if (timeElapsed >= 0.5f)
-            {
-                purchaseCoolDown = false;
-            }
-
-            if (keyState.IsKeyDown(Keys.Q))
-            {
-                UI_Manager.goldAmount += 10;
-            }
-            else if (keyState.IsKeyDown(Keys.B))
-            {
-                UI_Manager.goldAmount -= 10;
-            }
-
-            if (keyState.IsKeyDown(Keys.W))
-            {
-                UI_Manager.woodAmount += 10;
-            }
-            else if (keyState.IsKeyDown(Keys.L))
-            {
-                UI_Manager.woodAmount -= 10;
-            }
-            if (keyState.IsKeyDown (Keys.R))
-            {
-                Structure.level = 2;
-
-            }
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
