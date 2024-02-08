@@ -31,7 +31,7 @@ namespace ThreadProject
             sprite = content.Load<Texture2D>("dwarven home");
 
             GameWorld.InstantiateGameObject(buildWorker[0] = new Button(new Vector2(-500, -500), "Buy Worker", ThreadForWorkers));
-            GameWorld.InstantiateGameObject(buildWorker[1] = new Button(new Vector2(-500, -500), "Expand Mine", null));
+            GameWorld.InstantiateGameObject(buildWorker[1] = new Button(new Vector2(-500, -500), "Expand Mine", UpgradeMine));
 
             PositionUpdate();
         }
@@ -124,6 +124,16 @@ namespace ThreadProject
             GameWorld.InstantiateGameObject(workerArray[workerCount]);
             workerArray[workerCount].GoldLocking(lockObject);
             workerArray[workerCount].Working(lockObject);
+        }
+
+        public void UpgradeMine()
+        {
+            buildWorker[0].Position = new Vector2(-500, -500);
+            buildWorker[1].Position = new Vector2(-500, -500);
+
+            Structures.UpgradeMine();
+
+            active = true;
         }
     }
 }
