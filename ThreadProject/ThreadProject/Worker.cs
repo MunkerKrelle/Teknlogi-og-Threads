@@ -29,6 +29,7 @@ namespace ThreadProject
         private bool atWorkStructure = false;
         private bool atTownHall = false;
         private string profession;
+        private Button[] job = new Button[2];
 
         public int WorkerCost
         {
@@ -51,6 +52,10 @@ namespace ThreadProject
             gold = content.Load<Texture2D>("Gold");
             //rectangleForButtons = new Rectangle((int)position.X, (int)position.Y, sprite.Width / 2, sprite.Height / 2);
 
+            //GameWorld.InstantiateGameObject(job[0] = new Button(new Vector2(-500, -500), "Mine Gold", GoldMining));
+            //GameWorld.InstantiateGameObject(job[1] = new Button(new Vector2(-500, -500), "Chop Wood", WoodCutting));
+
+
             PositionUpdate();
         }
 
@@ -70,14 +75,16 @@ namespace ThreadProject
         /// </summary>
         public void MouseOnButton()
         {
-
-            if (mouseState.X > minPosition.X && mouseState.Y > minPosition.Y && mouseState.X < maxPosition.X && mouseState.Y < maxPosition.Y)
+            if (active)
             {
-                colorCode = Color.LightGray;
-            }
-            else
-            {
-                colorCode = Color.White;
+                if (mouseState.X > minPosition.X && mouseState.Y > minPosition.Y && mouseState.X < maxPosition.X && mouseState.Y < maxPosition.Y)
+                {
+                    colorCode = Color.LightGray;
+                }
+                else
+                {
+                    colorCode = Color.White;
+                }
             }
         }
 
@@ -92,7 +99,7 @@ namespace ThreadProject
             }
             if (mouseState.X > minPosition.X && mouseState.Y > minPosition.Y && mouseState.X < maxPosition.X && mouseState.Y < maxPosition.Y)
             {
-                JobAcquired();
+                ChooseJob();
             }
         }
 
@@ -157,10 +164,29 @@ namespace ThreadProject
             }
         }
 
-        public void JobAcquired()
+        public void WoodCutting()
         {
+            job[0].RemoveObject();
+            job[1].RemoveObject();
+            active = false;
             profession = "WoodCutting";
             idle = false;
+        }
+
+        public void GoldMining()
+        {
+            job[0].RemoveObject();
+            job[1].RemoveObject();
+            profession = "GoldMining";
+            idle = false;
+        }
+
+        public void ChooseJob()
+        {
+            active = false;
+            colorCode = Color.White;
+            GameWorld.InstantiateGameObject(job[0] = new Button(new Vector2(position.X, position.Y - 50), "Mine Gold", GoldMining));
+            GameWorld.InstantiateGameObject(job[1] = new Button(new Vector2(position.X, position.Y + 50), "Chop Wood", WoodCutting));
         }
 
         public void Working(object ob)

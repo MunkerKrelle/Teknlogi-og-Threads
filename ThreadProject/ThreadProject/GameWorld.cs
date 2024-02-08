@@ -98,7 +98,7 @@ namespace ThreadProject
             mouseState = Mouse.GetState();
 
             AddNewGameObjects();
-            //RemoveGameObjects();
+            RemoveGameObjects();
 
             foreach (var gameObject in gameObjects)
             {
