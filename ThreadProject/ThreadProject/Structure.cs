@@ -9,7 +9,7 @@ using ThreadProject;
         static public int level = 1;
 
         /// <summary>
-        /// Semaphore til at styre adgangen til en delt ressource, der tillader op til 5 tråde at komme ind på én gang
+        /// Semaphore bruges til at styre adgangen til en delt ressource, der tillader op til 5 tråde at komme ind på én gang
         /// </summary>
         static Semaphore MySemaphore = new Semaphore(1, 5);
 
