@@ -59,6 +59,7 @@ namespace ThreadProject
             gameObjects = new List<GameObject>();
            // gameObjects.Add(new Worker()); //all this is an instance.
             gameObjects.Add(new Gold());
+            gameObjects.Add(new TownHall());
             gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
 
             myUIManager = new UI_Manager();
@@ -195,8 +196,9 @@ namespace ThreadProject
             workerArray[workerCount] = new Worker();
             workerArray[workerCount].Position = new Vector2(mouseState.Position.X, mouseState.Position.Y);
             InstantiateGameObject(workerArray[workerCount]);
+            workerArray[workerCount].GoldLocking(lockObject);
             workerArray[workerCount].Working(lockObject);
-            //workerArray[workerCount].GoldLocking(lockObject);
+            
             workerCount++; // maybe sync criticall area?
         }
 
