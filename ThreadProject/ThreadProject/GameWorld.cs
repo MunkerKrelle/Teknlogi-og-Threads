@@ -12,7 +12,7 @@ namespace ThreadProject
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private static List<GameObject> gameObjects;
+        public static List<GameObject> gameObjects;
         private static List<GameObject> gameObjectsToAdd;
         private Button chopTreesButton;
 
@@ -62,7 +62,7 @@ namespace ThreadProject
            // gameObjects.Add(new Worker()); //all this is an instance.
             gameObjects.Add(new Gold());
             gameObjects.Add(new TownHall());
-            gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
+
 
             myUIManager = new UI_Manager();
             //myUIManager.Start();
@@ -73,6 +73,8 @@ namespace ThreadProject
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            testFont = Content.Load<SpriteFont>("File");
 
             foreach (var item in gameObjects)
             {
@@ -156,6 +158,8 @@ namespace ThreadProject
                 gameObject.Draw(_spriteBatch);
             }
 
+            _spriteBatch.DrawString(testFont, $"Mine Level: {Structures.level}", new Vector2(500, 500), Color.White);
+
             myUIManager.DrawResource(_spriteBatch);
 
             _spriteBatch.End();
@@ -164,7 +168,7 @@ namespace ThreadProject
             base.Draw(gameTime);
         }
 
-        private static void InstantiateGameObject(GameObject go)
+        public static void InstantiateGameObject(GameObject go)
         {
             gameObjectsToAdd.Add(go);
         }
@@ -184,7 +188,7 @@ namespace ThreadProject
         }
 
         private void RemoveGameObjects()
-        {/*
+        {
             List<GameObject> gameObjectsToRemove = new List<GameObject>();
             foreach (GameObject go in gameObjects)
             {
@@ -196,9 +200,9 @@ namespace ThreadProject
             foreach (GameObject goToRemove in gameObjectsToRemove)
             {
                 gameObjects.Remove(goToRemove);
-            }*/
+            }
         }
-        private void BuyWorker() 
+        public void BuyWorker() 
         {
             workerArray[workerCount] = new Worker();
             workerArray[workerCount].Position = new Vector2(mouseState.Position.X, mouseState.Position.Y);
