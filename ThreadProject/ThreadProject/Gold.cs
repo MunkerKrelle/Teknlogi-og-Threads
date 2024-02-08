@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ThreadProject
 {
-    internal class Gold : Resource
+    internal class Gold : GameObject
     {
         public override void LoadContent(ContentManager content)
         {
