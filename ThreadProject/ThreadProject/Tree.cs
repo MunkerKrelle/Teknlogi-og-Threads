@@ -18,6 +18,7 @@ namespace ThreadProject
 
         public Tree()
         {
+            scale = 2;
             position = new Vector2(400, 200);
         }
 
