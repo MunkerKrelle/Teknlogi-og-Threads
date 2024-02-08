@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Web;
 
 namespace ThreadProject
 { 
@@ -132,6 +133,11 @@ namespace ThreadProject
             else if (keyState.IsKeyDown(Keys.L))
             {
                 UI_Manager.woodAmount -= 10;
+            }
+            if (keyState.IsKeyDown (Keys.R))
+            {
+                Structures.level = 2;
+
             }
             // TODO: Add your update logic here
 
