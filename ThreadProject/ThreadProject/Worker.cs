@@ -23,8 +23,11 @@ namespace ThreadProject
         private int workerLevel = 1;
         static public int workerCost = 10;
         static private int testLock;
+        private float distance;
         private Texture2D gold;
         private bool idle = true;
+        private bool atWorkStructure = false;
+        private bool atTownHall = false;
         private string profession;
 
         public int WorkerCost
@@ -124,7 +127,7 @@ namespace ThreadProject
         public void ChopWood()
         {
             structure = new Vector2(1500, 500);
-            WoodLocking(testLock);
+            WoodLocking(GameWorld.lockObjectWood);
         }
 
         public void MineGold()
@@ -165,6 +168,8 @@ namespace ThreadProject
         {
             while (true)
             {
+                atWorkStructure = false;
+                atTownHall = false;
                 while (idle)
                 {
                     Thread.Sleep(100);
@@ -179,20 +184,33 @@ namespace ThreadProject
                     structure = new Vector2(1500, 100);
                 }
 
-                while (position != structure)
+                //while (position != structure)
+                while(atWorkStructure == false)
                 {
                     Move(structure);
+                    distance = Vector2.Distance(position, structure);
+                    if (distance <= 10)
+                    {
+                        atWorkStructure = true;
+                        Structures.Enter();
+                        structure = new Vector2(10, 10);
+                    }
                 }
 
-                Structures.Enter();
-
-                structure = new Vector2(10, 10);
-
-                while (position != structure)
+                //while (position != structure)
+                while (atTownHall == false)
                 {
                     Move(structure);
+                    distance = Vector2.Distance(position, structure);
+                    if (distance <= 10) 
+                    {
+
+                        atTownHall = true;
+                        Thread.Sleep(2000);
+                    }
+
+                    int i = 5;
                 }
-                int i = 5;
             }
         }
     }
