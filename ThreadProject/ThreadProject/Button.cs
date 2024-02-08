@@ -137,5 +137,10 @@ namespace ThreadProject
             //spriteBatch.DrawString(font, $"({mouseState.X},{mouseState.Y})", new Vector2 (100,100), colorCode);
             //spriteBatch.DrawString(font, $"{minPosition},{maxPosition}", new Vector2(100, 200), colorCode);
         }
+
+        public void RemoveObject()
+        {
+            shouldBeRemoved = true;
+        }
     }
 }
