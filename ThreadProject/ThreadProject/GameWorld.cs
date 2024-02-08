@@ -117,7 +117,7 @@ namespace ThreadProject
                 gameObject.Draw(_spriteBatch);
             }
 
-            _spriteBatch.DrawString(testFont, $"Mine Level: {Structures.level}", new Vector2(1250, 500), Color.White);
+            _spriteBatch.DrawString(testFont, $"Mine Level: {Structure.level}", new Vector2(1250, 500), Color.White);
 
             myUIManager.DrawResource(_spriteBatch);
 
@@ -160,12 +160,6 @@ namespace ThreadProject
             {
                 gameObjects.Remove(goToRemove);
             }
-        }
-    
-
-        private void ChopTree()
-        {
-            chopTreesButton.buttonText = "You are chopping trees";
         }
     }
 }
