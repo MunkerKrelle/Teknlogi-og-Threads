@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ThreadProject
 {
-    internal class Gold : Resource
+    internal class Gold : GameObject
     {
         public override void LoadContent(ContentManager content)
         {
@@ -16,6 +16,7 @@ namespace ThreadProject
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(sprite, new Vector2(1100, 50), Color.White);
         }
     }
 }
