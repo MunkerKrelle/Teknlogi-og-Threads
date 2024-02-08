@@ -8,7 +8,7 @@ namespace ThreadProject
     {
         public override void LoadContent(ContentManager content)
         {
-            
+            sprite = content.Load<Texture2D>("Minerals");
         }
         
         public override void Update(GameTime gameTime)

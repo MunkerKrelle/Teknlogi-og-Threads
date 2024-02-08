@@ -193,7 +193,7 @@ namespace ThreadProject
                         atWorkStructure = true;
                         if (profession == "GoldMining")
                         {
-                            Structures.Enter();
+                            Structure.Enter();
                             structure = new Vector2(250, GameWorld.ScreenSize.Y / 2 + 50);
                         }
                         else if (profession == "WoodCutting") 

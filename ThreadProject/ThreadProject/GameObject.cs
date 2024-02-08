@@ -46,7 +46,7 @@ namespace ThreadProject
             mine = content.Load<Texture2D>("Health");
             mineScale = new Vector2(0.6f);
             font = content.Load<SpriteFont>("File");
-            sprite = content.Load<Texture2D>("Minerals");
+           
         }
 
         public virtual void Update(GameTime gameTime)
