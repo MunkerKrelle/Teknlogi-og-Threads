@@ -13,7 +13,7 @@ namespace ThreadProject
         }
         public override void Update(GameTime gameTime)
         {
-            //Structures.level++;
+            
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

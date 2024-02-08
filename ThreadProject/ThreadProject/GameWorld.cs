@@ -137,7 +137,7 @@ namespace ThreadProject
             }
             if (keyState.IsKeyDown (Keys.R))
             {
-                Structures.level = 2;
+                Structure.level = 2;
 
             }
             // TODO: Add your update logic here

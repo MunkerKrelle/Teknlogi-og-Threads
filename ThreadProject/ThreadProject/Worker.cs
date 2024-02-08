@@ -192,7 +192,7 @@ namespace ThreadProject
                     if (distance <= 10)
                     {
                         atWorkStructure = true;
-                        Structures.Enter();
+                        Structure.Enter();
                         structure = new Vector2(10, 10);
                     }
                 }
