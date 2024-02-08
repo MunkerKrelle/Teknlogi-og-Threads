@@ -192,7 +192,6 @@ namespace ThreadProject
                 {
                     Move(structure);
                 }
-                int i = 5;
             }
         }
     }
