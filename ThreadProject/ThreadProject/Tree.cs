@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ThreadProject
 {
-    internal class Tree : Resource
+    internal class Tree : GameObject
     {
         private Texture2D[] trees;
         private Random rnd = new Random();

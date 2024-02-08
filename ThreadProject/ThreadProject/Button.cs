@@ -41,7 +41,7 @@ namespace ThreadProject
         public Button(/*Texture2D buttonTexture,*/ Vector2 buttonPosition, string buttonText, ButtonFunction buttonFunction)
         {
             //sprite = buttonTexture;
-            scale = 2;
+            scale = 0.5f;
             position = buttonPosition;
             this.buttonText = buttonText;
             this.buttonFunction = buttonFunction;
@@ -62,6 +62,8 @@ namespace ThreadProject
                 }
                 newState = mouseState;
             }
+
+            PositionUpdate();
         }
 
         public override void LoadContent(ContentManager content)
@@ -70,11 +72,9 @@ namespace ThreadProject
 
             font = content.Load<SpriteFont>("File");
 
-            sprite = content.Load<Texture2D>("tree-light-green-isaiah658");
+            sprite = content.Load<Texture2D>("button");
 
             rectangleForButtons = new Rectangle((int)position.X, (int)position.Y, sprite.Width / 2, sprite.Height / 2);
-
-            PositionUpdate();
         }
 
         /// <summary>
@@ -84,8 +84,8 @@ namespace ThreadProject
         {
             minPosition.X = position.X - (sprite.Width / 2);
             minPosition.Y = position.Y - (sprite.Height / 2);
-            maxPosition.X = position.X + (sprite.Width * scale);
-            maxPosition.Y = position.Y + (sprite.Height * scale);
+            maxPosition.X = position.X + (sprite.Width/2 * scale);
+            maxPosition.Y = position.Y + (sprite.Height/2 * scale);
         }
 
         /// <summary>
@@ -93,15 +93,14 @@ namespace ThreadProject
         /// </summary>
         public void MouseOnButton()
         {
-
-            if (mouseState.X > minPosition.X && mouseState.Y > minPosition.Y && mouseState.X < maxPosition.X && mouseState.Y < maxPosition.Y)
-            {
-                colorCode = Color.LightGray;
-            }
-            else
-            {
-                colorCode = Color.White;
-            }
+                if (mouseState.X > minPosition.X && mouseState.Y > minPosition.Y && mouseState.X < maxPosition.X && mouseState.Y < maxPosition.Y)
+                {
+                    colorCode = Color.LightGray;
+                }
+                else
+                {
+                    colorCode = Color.White;
+                }
         }
 
         /// <summary>
@@ -129,11 +128,14 @@ namespace ThreadProject
 
             origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
 
-            spriteBatch.Draw(sprite, position, null, colorCode, 0, origin, scale, SpriteEffects.None, 1f);
+            if (active)
+            {
+                spriteBatch.Draw(sprite, position, null, colorCode, 0, origin, scale, SpriteEffects.None, 1f);
 
-            spriteBatch.DrawString(font, buttonText, position, Color.Black, 0, originText, 1, SpriteEffects.None, 0.1f);
-            spriteBatch.DrawString(font, $"({mouseState.X},{mouseState.Y})", new Vector2 (100,100), colorCode);
-            spriteBatch.DrawString(font, $"{minPosition},{maxPosition}", new Vector2(100, 200), colorCode);
+                spriteBatch.DrawString(font, buttonText, position, Color.Black, 0, originText, 1, SpriteEffects.None, 0.1f);
+            }
+            //spriteBatch.DrawString(font, $"({mouseState.X},{mouseState.Y})", new Vector2 (100,100), colorCode);
+            //spriteBatch.DrawString(font, $"{minPosition},{maxPosition}", new Vector2(100, 200), colorCode);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ThreadProject
 {
-    internal class GameObject
+    public class GameObject
     {
         protected Vector2 position;
         protected Texture2D sprite;
@@ -18,14 +18,17 @@ namespace ThreadProject
         protected Vector2 origin;
         private Texture2D mine;
         private Vector2 mineScale;
-        
+        protected bool shouldBeRemoved;
+
+        public bool ShouldBeRemoved { get { return shouldBeRemoved; } }
+
         protected Color colorCode = Color.White;
         protected Vector2 minPosition;
         protected Vector2 maxPosition;
 
         public MouseState mouseState;
         public MouseState newState;
-        protected bool active;
+        public bool active;
 
         public Vector2 Position
         {

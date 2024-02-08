@@ -39,8 +39,7 @@ namespace ThreadProject
 
         public Worker()
         {
-            //position = new Vector2(0, 0);
-            position = new Vector2(GameWorld.mouseState.Position.X, GameWorld.mouseState.Position.Y);
+            position = new Vector2(0, 0);
             scale = 3;
             speed = 0.00007f;
             active = true;
