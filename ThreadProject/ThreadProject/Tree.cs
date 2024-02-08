@@ -16,9 +16,9 @@ namespace ThreadProject
         private Random rnd = new Random();
 
 
-        public Tree(Vector2 treePos)
+        public Tree()
         {
-            position = treePos;
+            position = new Vector2(400, 200);
         }
 
         public override void LoadContent(ContentManager content)
@@ -33,5 +33,7 @@ namespace ThreadProject
         public override void Update(GameTime gameTime)
         {
         }
+
+       
     }
 }
