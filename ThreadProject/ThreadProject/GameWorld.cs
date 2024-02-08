@@ -76,6 +76,8 @@ namespace ThreadProject
 
             testFont = Content.Load<SpriteFont>("File");
 
+
+
             foreach (var item in gameObjects)
             {
                 item.LoadContent(Content);
@@ -158,7 +160,7 @@ namespace ThreadProject
                 gameObject.Draw(_spriteBatch);
             }
 
-            _spriteBatch.DrawString(testFont, $"Mine Level: {Structures.level}", new Vector2(500, 500), Color.White);
+            _spriteBatch.DrawString(testFont, $"Mine Level: {Structure.level}", new Vector2(500, 500), Color.White);
 
             myUIManager.DrawResource(_spriteBatch);
 
