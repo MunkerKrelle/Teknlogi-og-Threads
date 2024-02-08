@@ -11,7 +11,7 @@ namespace ThreadProject
         static public void Enter()
         {
             MySemaphore.WaitOne();
-            Thread.Sleep(5000);
+            Thread.Sleep(1000);
             MySemaphore.Release(level);
             
         }

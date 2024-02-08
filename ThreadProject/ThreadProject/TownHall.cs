@@ -17,7 +17,7 @@ namespace ThreadProject
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, new Vector2(600, 400), Color.White);
+            spriteBatch.Draw(sprite, new Vector2(500, 400), Color.White);
         }
     }
 }

@@ -63,7 +63,7 @@ namespace ThreadProject
             gameObjects.Add(new Gold());
             gameObjects.Add(new TownHall());
             gameObjects.Add(chopTreesButton = new Button(new Vector2 (100,100), "", ChopTree));
-
+            gameObjects.Add(new Tree());
             myUIManager = new UI_Manager();
             //myUIManager.Start();
 

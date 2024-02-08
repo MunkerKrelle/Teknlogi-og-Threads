@@ -160,7 +160,7 @@ namespace ThreadProject
 
         public void JobAcquired()
         {
-            profession = "WoodCutting";
+            profession = "GoldMining";
             idle = false;
         }
 
@@ -177,11 +177,11 @@ namespace ThreadProject
 
                 if (profession == "WoodCutting")
                 {
-                    structure = new Vector2(1500, 500);
+                    structure = new Vector2(400, 200);
                 }
                 else if (profession == "GoldMining")
                 {
-                    structure = new Vector2(1500, 100);
+                    structure = new Vector2(1500, 350);
                 }
 
                 //while (position != structure)
@@ -192,8 +192,16 @@ namespace ThreadProject
                     if (distance <= 10)
                     {
                         atWorkStructure = true;
-                        Structures.Enter();
-                        structure = new Vector2(10, 10);
+                        if (profession == "GoldMining")
+                        {
+                            Structures.Enter();
+                            structure = new Vector2(700, 600);
+                        }
+                        else if (profession == "WoodCutting") 
+                        {
+                            Thread.Sleep(5000);
+                            structure = new Vector2(700, 600);
+                        }
                     }
                 }
 
@@ -204,8 +212,15 @@ namespace ThreadProject
                     distance = Vector2.Distance(position, structure);
                     if (distance <= 10) 
                     {
-
                         atTownHall = true;
+                        if (profession == "WoodCutting")
+                        {
+                            UI_Manager.woodAmount += 10;
+                        }
+                        if (profession == "GoldMining")
+                        {
+                            UI_Manager.goldAmount += 10;
+                        }
                         Thread.Sleep(2000);
                     }
 
