@@ -13,6 +13,5 @@ namespace ThreadProject
             Thread.Sleep(5000);
             MySemaphore.Release(1);
         }
-
     }
 }
