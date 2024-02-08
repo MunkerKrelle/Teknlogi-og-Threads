@@ -110,11 +110,14 @@ namespace ThreadProject
             buildWorker[0].Position = new Vector2(-500, -500);
             buildWorker[1].Position = new Vector2(-500, -500);
 
-            Thread WorkerThread = new Thread(BuyWorker);
-            WorkerThread.IsBackground = true;
-            WorkerThread.Start();
-
+            if (UI_Manager.goldAmount >= Worker.workerCost)
+            {
+                Thread WorkerThread = new Thread(BuyWorker);
+                WorkerThread.IsBackground = true;
+                WorkerThread.Start();
+            }
             active = true;
+            
         }
 
         public void BuyWorker()
