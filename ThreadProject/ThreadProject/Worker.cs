@@ -163,7 +163,7 @@ namespace ThreadProject
             idle = false;
         }
 
-        public void Working(object ob)
+        public void Working()
         {
             while (true)
             {

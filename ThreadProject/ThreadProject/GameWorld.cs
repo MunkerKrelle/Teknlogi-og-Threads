@@ -161,15 +161,7 @@ namespace ThreadProject
                 gameObjects.Remove(goToRemove);
             }
         }
-        public void BuyWorker() 
-        {
-            workerArray[workerCount] = new Worker();
-            workerArray[workerCount].Position = new Vector2(mouseState.Position.X, mouseState.Position.Y);
-            InstantiateGameObject(workerArray[workerCount]);
-            workerArray[workerCount].GoldLocking(lockObjectGold);
-            workerArray[workerCount].Working(lockObjectGold);
-            workerCount++; // maybe sync criticall area?
-        }
+    
 
         private void ChopTree()
         {

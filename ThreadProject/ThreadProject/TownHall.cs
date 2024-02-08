@@ -123,7 +123,7 @@ namespace ThreadProject
             workerArray[workerCount].Position = new Vector2(position.X + 200, position.Y);
             GameWorld.InstantiateGameObject(workerArray[workerCount]);
             workerArray[workerCount].GoldLocking(lockObject);
-            workerArray[workerCount].Working(lockObject);
+            workerArray[workerCount].Working();
         }
 
         public void UpgradeMine()
