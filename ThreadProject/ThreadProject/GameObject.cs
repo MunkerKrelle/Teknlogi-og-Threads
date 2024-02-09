@@ -4,7 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace ThreadProject
-{
+{/// <summary>
+/// The GameObject class is the main class our gameObjects inherit from, and they use base variables like sprite, position, 
+/// scale, origin etc.
+///
+/// </summary>
     public class GameObject
     {
         protected Vector2 position;
