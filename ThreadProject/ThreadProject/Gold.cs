@@ -3,7 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace ThreadProject
-{/// <summary>
+{
+/// <summary>
 /// The Gold class loads the gold mine sprite.
 /// </summary>
     internal class Gold : GameObject
@@ -15,10 +16,7 @@ namespace ThreadProject
         {
             sprite = content.Load<Texture2D>("Minerals");
         }
-        
-        public override void Update(GameTime gameTime)
-        {
-        }
+
         /// <summary>
         /// Draws the gold mine sprite
         /// </summary>

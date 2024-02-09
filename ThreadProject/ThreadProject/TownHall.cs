@@ -23,10 +23,6 @@ namespace ThreadProject
         // Objekt til låsning af tråde
         static readonly object lockObject = new object();
 
-        // Positioner for knapperne
-        private Vector2 buttonPos1;
-        private Vector2 buttonPos2;
-
         // Konstruktør
         public TownHall()
         {
@@ -38,7 +34,6 @@ namespace ThreadProject
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("dwarven home");
-
             
             GameWorld.InstantiateGameObject(buildWorker[0] = new Button(new Vector2(-500, -500), "Buy Worker", ThreadForWorkers));
             GameWorld.InstantiateGameObject(buildWorker[1] = new Button(new Vector2(-500, -500), "Expand Mine", UpgradeMine));
@@ -51,7 +46,6 @@ namespace ThreadProject
         /// </summary>
         public void PositionUpdate()
         {
-            
             minPosition.X = position.X - (sprite.Width / 2);
             minPosition.Y = position.Y - (sprite.Height / 2);
             maxPosition.X = position.X + (sprite.Width / 2);
@@ -89,7 +83,6 @@ namespace ThreadProject
             }
             if (mouseState.X > minPosition.X && mouseState.Y > minPosition.Y && mouseState.X < maxPosition.X && mouseState.Y < maxPosition.Y)
             {
-                
                 colorCode = Color.Yellow;
                 TownHallButtons();
             }
@@ -138,7 +131,6 @@ namespace ThreadProject
                 WorkerThread.Start();
             }
             active = true;
-
         }
 
         /// <summary>

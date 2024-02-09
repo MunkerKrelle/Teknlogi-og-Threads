@@ -12,8 +12,6 @@ namespace ThreadProject
     {
         static public int goldAmount = 50;
         static public int woodAmount = 50;
-        private int workerPrice;
-        private int warriorPrice;
         private Texture2D goldSprite;
         private Texture2D woodSprite;
         private SpriteFont uiFont;
