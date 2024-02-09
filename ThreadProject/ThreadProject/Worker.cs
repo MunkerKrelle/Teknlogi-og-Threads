@@ -12,7 +12,10 @@ using System.Drawing.Imaging;
 using System.Threading;
 
 namespace ThreadProject
-{
+{/// <summary>
+/// Our Worker class is responsible for the worker unit in the game, it handles infomation such as position, scale, price
+/// aswell as methods and updates for how to mine gold or chop wood.
+/// </summary>
     internal class Worker : GameObject
     {
         private float speed;
@@ -37,7 +40,9 @@ namespace ThreadProject
             set { workerCost = value; }
         }
 
-
+        /// <summary>
+        /// The constructor for the worker, sets postion, scale, speed and activates the instance of the worker.
+        /// </summary>
         public Worker()
         {
             position = new Vector2(0, 0);
@@ -89,7 +94,7 @@ namespace ThreadProject
         }
 
         /// <summary>
-        /// Checks if the mouse is pressed on a pressabled object
+        /// Checks if the mouse is pressed on a pressable object
         /// </summary>
         public void MousePressed()
         {
@@ -102,7 +107,10 @@ namespace ThreadProject
                 ChooseJob();
             }
         }
-
+        /// <summary>
+        /// Update handles position and mouse clicks for the worker. 
+        /// </summary>
+        /// <param name="gameTime"></param> 
         public override void Update(GameTime gameTime)
         {
             //test++;
@@ -140,13 +148,20 @@ namespace ThreadProject
         {
             structure = new Vector2(1500, 100);
         }
-
+        /// <summary>
+        /// moving the worker relative to its direction and speed. We normalize the vector to ensure even speed during diagonal movement
+        /// which causes double input.
+        /// </summary>
+        /// <param name="structurePos"></param> structurePos is the target postion of a position the worker will be moving towards
         public void Move(Vector2 structurePos)
         {
-            Vector2 directionMove = Vector2.Normalize(structurePos - position); //Vi normalizer vectoren fordi eller ville bulleten bevæge sig hurtigere, når den bevæger sig skråt
+            Vector2 directionMove = Vector2.Normalize(structurePos - position);
             position += directionMove * speed;
         }
-
+        /// <summary>
+        /// Here we ensure that only one thread can access the goldAmount variable at a time to prevent race conditions.
+        /// </summary>
+        /// <param name="ob"></param> The locking object used for securing the gold amount in a multi thread setup.
         public void GoldLocking(object ob)
         {
             lock (ob)
@@ -155,6 +170,10 @@ namespace ThreadProject
                 //testLock++;
             }
         }
+        /// <summary>
+        /// Here we ensure that only one thread can access the woodAmount variable at a time to prevent race conditions.
+        /// </summary>
+        /// <param name="ob"></param> The locking object used for securing the wood amount in a multi thread setup.
         static public void WoodLocking(object ob)
         {
             lock (ob)
@@ -163,7 +182,10 @@ namespace ThreadProject
                 //testLock++;
             }
         }
-
+        /// <summary>
+        /// The WoodCutting method is enabled when the player clicks on the corresponding button for cutting wood, 
+        /// which afterwards disables clicking, to prevent repeat clicks.
+        /// </summary>
         public void WoodCutting()
         {
             job[0].RemoveObject();
@@ -172,7 +194,10 @@ namespace ThreadProject
             profession = "WoodCutting";
             idle = false;
         }
-
+        /// <summary>
+        /// The GoldMining method is enabled when the player clicks on the corresponding button for mining gold, 
+        /// which afterwards disables clicking, to prevent repeat clicks.
+        /// </summary>
         public void GoldMining()
         {
             job[0].RemoveObject();
@@ -180,7 +205,7 @@ namespace ThreadProject
             profession = "GoldMining";
             idle = false;
         }
-
+     
         public void ChooseJob()
         {
             active = false;
@@ -189,6 +214,19 @@ namespace ThreadProject
             GameWorld.InstantiateGameObject(job[1] = new Button(new Vector2(position.X, position.Y + 50), "Chop Wood", WoodCutting));
         }
 
+        /// <summary>
+        /// The working method handles the movement and targeting of the worker in a series of loops. 
+        /// The first loop ensures both booleans are false, to prevent lockouts in the while.
+        /// Nested within that loop is an idle loop which will sleep the thread running the code for 1/10 of a second,
+        /// and repeat this process for aslong as the idle boolean is true.
+        /// When it is no longer true, it checks for which profession is selected, and then sets a target position
+        /// for the worker to move towards. 
+        /// Eventually the worker will get to a specified(gold mine or forest) position 
+        /// and if it is mining gold it will enter the semaphore.
+        /// if it is chopping wood, it will simply wait 5 seconds.
+        /// Finally it will return back to the townhall with either gold or wood, and the player UI updates accordingly
+        /// 
+        /// </summary>
         public void Working()
         {
             while (true)
@@ -230,7 +268,6 @@ namespace ThreadProject
                     }
                 }
 
-                //while (position != structure)
                 while (atTownHall == false)
                 {
                     Move(structure);
@@ -248,8 +285,6 @@ namespace ThreadProject
                         }
                         Thread.Sleep(2000);
                     }
-
-                    int i = 5;
                 }
             }
         }
