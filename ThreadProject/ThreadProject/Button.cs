@@ -17,7 +17,7 @@ namespace ThreadProject
         public string buttonText;
 
         /// <summary>
-        /// Opretter en knap man kan trykke på med musen som kan kører en function
+        /// Creates a button that can be place, has some text and a specific function
         /// </summary>
         /// <param name="buttonPosition">Knappens position på skærmen</param>
         /// <param name="buttonText">Tekst der bliver skrevet på knappen</param>
@@ -97,7 +97,6 @@ namespace ThreadProject
             }
             if (mouseState.X > minPosition.X && mouseState.Y > minPosition.Y && mouseState.X < maxPosition.X && mouseState.Y < maxPosition.Y)
             {
-                //buttonSound.Play();
                 colorCode = Color.Yellow;
                 buttonFunction.Invoke(); //Kører functionen som knappen indeholder. For at kunne kører en delegate, kan man bruge .Invoke()
             }
