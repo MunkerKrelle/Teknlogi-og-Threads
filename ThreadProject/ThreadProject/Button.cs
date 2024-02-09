@@ -1,36 +1,17 @@
-﻿using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
-using System;
-using System.Threading.Tasks;
 
 namespace ThreadProject
 {
     internal class Button : GameObject
     {
-        private Rectangle rectangleForButtons;
         private Vector2 originText;
         public delegate void ButtonFunction();
         public ButtonFunction buttonFunction;
-        private SoundEffect buttonSound;
 
         public string buttonText;
-        public string currentButtonText;
-        public Vector2 ButtonPosition
-        {
-            get { return position; }
-            set { position = value; }
-        }
-
-        //protected Vector2 SpriteSize
-        //{
-        //    get
-        //    {
-        //        return new Vector2(sprite.Width * scale, sprite.Height * scale);
-        //    }
-        //}
 
         /// <summary>
         /// Opretter en knap man kan trykke på med musen som kan kører en function
@@ -40,12 +21,11 @@ namespace ThreadProject
         /// <param name="buttonFunction">Hvilken function der bliver kørt når knappen bliver trykket</param>
         public Button(/*Texture2D buttonTexture,*/ Vector2 buttonPosition, string buttonText, ButtonFunction buttonFunction)
         {
-            //sprite = buttonTexture;
+            //sprite = buttonTexture; // Can give the buttons unique sprites if required 
             scale = 0.5f;
             position = buttonPosition;
             this.buttonText = buttonText;
             this.buttonFunction = buttonFunction;
-            currentButtonText = buttonText;
             active = true;
     }
 
@@ -66,15 +46,15 @@ namespace ThreadProject
             PositionUpdate();
         }
 
+        /// <summary>
+        /// Loads the necessary sprites for the button and the text
+        /// </summary>
+        /// <param name="content"></param>
         public override void LoadContent(ContentManager content)
         {
-            //buttonSound = content.Load<SoundEffect>("Sound\\questClick");
-
             font = content.Load<SpriteFont>("File");
 
             sprite = content.Load<Texture2D>("button");
-
-            rectangleForButtons = new Rectangle((int)position.X, (int)position.Y, sprite.Width / 2, sprite.Height / 2);
         }
 
         /// <summary>
@@ -134,8 +114,6 @@ namespace ThreadProject
 
                 spriteBatch.DrawString(font, buttonText, position, Color.Black, 0, originText, 1, SpriteEffects.None, 0.1f);
             }
-            //spriteBatch.DrawString(font, $"({mouseState.X},{mouseState.Y})", new Vector2 (100,100), colorCode);
-            //spriteBatch.DrawString(font, $"{minPosition},{maxPosition}", new Vector2(100, 200), colorCode);
         }
 
         public void RemoveObject()

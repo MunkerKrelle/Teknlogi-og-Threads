@@ -14,18 +14,13 @@ namespace ThreadProject
         private float speed;
         private Vector2 structure;
 
-        private int moveSpeed = 5;
-        private int workSpeed = 1;
-        private int workerLevel = 1;
         static public int workerCost = 10;
-        static private int testLock;
-        private float distance;
-        private Texture2D gold;
+        private float distance; //Distance from worker to Townhall or workplace
         private bool idle = true;
         private bool atWorkStructure = false;
         private bool atTownHall = false;
         private string profession;
-        private Button[] job = new Button[2];
+        private Button[] job = new Button[2]; 
 
         public int WorkerCost
         {
@@ -47,12 +42,6 @@ namespace ThreadProject
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>("dwarf-male-base");
-            gold = content.Load<Texture2D>("Gold");
-            //rectangleForButtons = new Rectangle((int)position.X, (int)position.Y, sprite.Width / 2, sprite.Height / 2);
-
-            //GameWorld.InstantiateGameObject(job[0] = new Button(new Vector2(-500, -500), "Mine Gold", GoldMining));
-            //GameWorld.InstantiateGameObject(job[1] = new Button(new Vector2(-500, -500), "Chop Wood", WoodCutting));
-
 
             PositionUpdate();
         }
@@ -100,24 +89,14 @@ namespace ThreadProject
                 ChooseJob();
             }
         }
+
         /// <summary>
         /// Update handles position and mouse clicks for the worker. 
         /// </summary>
         /// <param name="gameTime"></param> 
         public override void Update(GameTime gameTime)
         {
-            //test++;
-            /*Random random1 = new Random();
-            Random random2 = new Random();
-            position.X = random1.Next(100, 400);
-            position.Y = random2.Next(100, 400);*/
-            //position.Y++;
-
-            //mouseState.Position.X; 
-            //mouseState.Position.Y
-            //position = new Vector2(GameWorld.mouseState.Position.X, GameWorld.mouseState.Position.Y);
-
-            PositionUpdate();
+           PositionUpdate();
             MouseOnButton();
             mouseState = Mouse.GetState();
 
@@ -141,6 +120,7 @@ namespace ThreadProject
             Vector2 directionMove = Vector2.Normalize(structurePos - position);
             position += directionMove * speed;
         }
+
         /// <summary>
         /// Here we ensure that only one thread can access the goldAmount variable at a time to prevent race conditions.
         /// </summary>
@@ -150,9 +130,9 @@ namespace ThreadProject
             lock (ob)
             {
                 UI_Manager.goldAmount -= workerCost;
-                //testLock++;
             }
         }
+
         /// <summary>
         /// Here we ensure that only one thread can access the woodAmount variable at a time to prevent race conditions.
         /// </summary>
@@ -165,6 +145,7 @@ namespace ThreadProject
                 //testLock++;
             }
         }
+
         /// <summary>
         /// The WoodCutting method is enabled when the player clicks on the corresponding button for cutting wood, 
         /// which afterwards disables clicking, to prevent repeat clicks.
@@ -177,6 +158,7 @@ namespace ThreadProject
             profession = "WoodCutting";
             idle = false;
         }
+
         /// <summary>
         /// The GoldMining method is enabled when the player clicks on the corresponding button for mining gold, 
         /// which afterwards disables clicking, to prevent repeat clicks.
@@ -188,7 +170,10 @@ namespace ThreadProject
             profession = "GoldMining";
             idle = false;
         }
-     
+
+        /// <summary>
+        /// Creates two buttons for selecting jobs. The workers are also deactivated, so they cant be interacted with 
+        /// </summary>
         public void ChooseJob()
         {
             active = false;
