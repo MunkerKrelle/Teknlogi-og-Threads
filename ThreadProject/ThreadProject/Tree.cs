@@ -9,13 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ThreadProject
-{
+{/// <summary>
+/// The Tree class loads the tree sprite and determines its position and scale.
+/// </summary>
     internal class Tree : GameObject
     {
         private Texture2D[] trees;
         private Random rnd = new Random();
 
-
+        /// <summary>
+        /// the constructor sets the scale and position of the tree
+        /// </summary>
         public Tree()
         {
             scale = 2;

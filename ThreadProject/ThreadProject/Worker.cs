@@ -138,16 +138,6 @@ namespace ThreadProject
             }
         }
 
-        public void ChopWood()
-        {
-            structure = new Vector2(1500, 500);
-            WoodLocking(GameWorld.lockObjectWood);
-        }
-
-        public void MineGold()
-        {
-            structure = new Vector2(1500, 100);
-        }
         /// <summary>
         /// moving the worker relative to its direction and speed. We normalize the vector to ensure even speed during diagonal movement
         /// which causes double input.
