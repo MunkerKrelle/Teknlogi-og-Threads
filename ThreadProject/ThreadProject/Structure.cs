@@ -1,6 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Threading;
 using ThreadProject;
+/// <summary>
+/// Den her klasse opretter semaphoren, som bliver brugt til at tillade indgang i minen
+/// </summary>
     internal class Structure : GameObject
     {
 
