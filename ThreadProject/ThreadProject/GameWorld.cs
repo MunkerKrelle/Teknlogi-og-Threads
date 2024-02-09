@@ -75,6 +75,8 @@ namespace ThreadProject
 
             testFont = Content.Load<SpriteFont>("File");
 
+
+
             foreach (var item in gameObjects)
             {
                 item.LoadContent(Content);
