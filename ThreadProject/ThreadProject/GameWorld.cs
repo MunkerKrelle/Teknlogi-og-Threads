@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Web;
 
 namespace ThreadProject
 { /// <summary>
@@ -90,6 +87,8 @@ namespace ThreadProject
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             testFont = Content.Load<SpriteFont>("File");
+
+
 
             foreach (var item in gameObjects)
             {

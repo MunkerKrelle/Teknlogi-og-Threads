@@ -2,8 +2,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Threading.Tasks;
 
 namespace ThreadProject
 {
@@ -20,6 +18,9 @@ namespace ThreadProject
         private Vector2 mineScale;
         protected bool shouldBeRemoved;
 
+        /// <summary>
+        /// Used to remove our buttons after being pressed
+        /// </summary>
         public bool ShouldBeRemoved { get { return shouldBeRemoved; } }
 
         protected Color colorCode = Color.White;
@@ -35,6 +36,11 @@ namespace ThreadProject
             get { return position; }
             set { position = value; }
         }
+
+        /// <summary>
+        /// NOT USED???
+        /// </summary>
+        /// <param name="content"></param>
         public virtual void LoadContent(ContentManager content)
         {
             //sprite = content.Load<Texture2D>("dwarven home");
@@ -46,13 +52,18 @@ namespace ThreadProject
             mine = content.Load<Texture2D>("Health");
             mineScale = new Vector2(0.6f);
             font = content.Load<SpriteFont>("File");
+           
         }
-
+        
         public virtual void Update(GameTime gameTime)
         {
 
         }
 
+        /// <summary>
+        /// Draws our sprites for the tree and the town hall
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             origin = new Vector2(sprite.Width/2, sprite.Height/2);
