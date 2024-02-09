@@ -5,6 +5,9 @@ using Microsoft.Xna.Framework;
 
 namespace ThreadProject
 {
+    /// <summary>
+    /// The button class is a GameObject that can be clicked on and can then hold and run a specific function
+    /// </summary>
     internal class Button : GameObject
     {
         private Vector2 originText;
