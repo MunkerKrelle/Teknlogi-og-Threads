@@ -1,14 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
-using static ThreadProject.Button;
-using System.Drawing.Imaging;
 using System.Threading;
 
 namespace ThreadProject
@@ -138,16 +131,6 @@ namespace ThreadProject
             }
         }
 
-        public void ChopWood()
-        {
-            structure = new Vector2(1500, 500);
-            WoodLocking(GameWorld.lockObjectWood);
-        }
-
-        public void MineGold()
-        {
-            structure = new Vector2(1500, 100);
-        }
         /// <summary>
         /// moving the worker relative to its direction and speed. We normalize the vector to ensure even speed during diagonal movement
         /// which causes double input.
