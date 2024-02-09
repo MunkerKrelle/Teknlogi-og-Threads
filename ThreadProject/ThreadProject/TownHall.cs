@@ -6,7 +6,9 @@ using System.Threading;
 
 namespace ThreadProject
 {
-
+    /// <summary>
+    /// Overall this class is used for managing the positioning, visibility and functionality for the buttons and the cursor.
+    /// </summary>
     internal class TownHall : GameObject
     {
         // Array til at holde knapper til at bygge arbejdere og udvide minen
