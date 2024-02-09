@@ -4,7 +4,8 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 
 namespace ThreadProject
-{ /// <summary>
+{ 
+/// <summary>
 /// The GameWorld Class handles updating the game, gameObjects, arrays, lists etc. Whilst also handling input from the player 
 /// through Mousestates. GameWorld also instantiates the locks which are used for syncronizing the threads when they attempt to
 /// enter critical regions of code such as resources that are shared.
@@ -15,7 +16,6 @@ namespace ThreadProject
         private SpriteBatch _spriteBatch;
         public static List<GameObject> gameObjects;
         private static List<GameObject> gameObjectsToAdd;
-        private Button chopTreesButton;
 
         private SpriteFont testFont;
         private UI_Manager myUIManager;
@@ -24,24 +24,10 @@ namespace ThreadProject
 
         private static Vector2 screenSize;
         public static Vector2 ScreenSize { get => screenSize; }
-        private Worker[] workerArray = new Worker[10];
-        private int workerCount = 0;
-        private bool purchaseCoolDown = false;
-        private float timeElapsed;
-        public static float DeltaTime;
-        //private int goldAmount = 500; //temp variable untill jeppe is done
-        
 
         static readonly object lockObjectGold = new object();
         static public readonly object lockObjectWood = new object();
-        /// <summary>
-        /// Gets the workerCount variable and sets it
-        /// </summary>
-        public int WorkerCount
-        {
-            get { return workerCount; }
-            set { workerCount = value; }
-        }
+
         /// <summary>
         /// Constructor which sets the default for the gameWorld, such as screen size, content directory etc.
         /// </summary>
@@ -57,6 +43,7 @@ namespace ThreadProject
             screenSize = new Vector2(_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
 
         }
+
         /// <summary>
         /// Initializes lists and adds gameObject instances to the list of gameObjects. This is done manually for objects
         /// which are expected to be available at the start, such as townhall, goldmine and tree. 
@@ -65,16 +52,12 @@ namespace ThreadProject
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             gameObjectsToAdd = new List<GameObject>();
             gameObjects = new List<GameObject>();
-           // gameObjects.Add(new Worker()); //all this is an instance.
             gameObjects.Add(new Gold());
             gameObjects.Add(new TownHall());
             gameObjects.Add(new Tree());
             myUIManager = new UI_Manager();
-            //myUIManager.Start();
 
             base.Initialize();
         }
@@ -88,16 +71,14 @@ namespace ThreadProject
 
             testFont = Content.Load<SpriteFont>("File");
 
-
-
             foreach (var item in gameObjects)
             {
                 item.LoadContent(Content);
             }
 
             myUIManager.LoadContent(Content);
-            // TODO: use this.Content to load your game content here
         }
+
         /// <summary>
         /// The update method handles adding and removing of our game objects by running the methods called 
         /// AddNewGameObjects and RemoveGameObjects. It also handles the gameobjects in our gameObject list
@@ -108,10 +89,6 @@ namespace ThreadProject
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            
-            
-            DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            timeElapsed += DeltaTime;
 
             KeyboardState keyState = Keyboard.GetState();
             mouseState = Mouse.GetState();
@@ -125,6 +102,7 @@ namespace ThreadProject
             }
             base.Update(gameTime);
         }
+
         /// <summary>
         /// We draw our game objects here when they have been added to the list of gameObjects. aswell as our UI manager.
         /// </summary>
@@ -145,10 +123,10 @@ namespace ThreadProject
             myUIManager.DrawResource(_spriteBatch);
 
             _spriteBatch.End();
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
+
         /// <summary>
         /// This is our second list of gameObjects, which is used as a buffer to add to our main list of gameObjects,
         /// to ensure we dont get errors when adding new gameObjects.
@@ -172,6 +150,7 @@ namespace ThreadProject
 
             gameObjectsToAdd.Clear();
         }
+
         /// <summary>
         /// Removes gameObjects in our gameObject list as those have already been added, and sets their bool to
         /// be allowed to be removed.

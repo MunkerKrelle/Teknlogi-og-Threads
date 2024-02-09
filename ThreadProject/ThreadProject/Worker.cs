@@ -20,7 +20,7 @@ namespace ThreadProject
         private bool atWorkStructure = false;
         private bool atTownHall = false;
         private string profession;
-        private Button[] job = new Button[2]; 
+        private Button[] job = new Button[2];
 
         public int WorkerCost
         {
@@ -96,7 +96,7 @@ namespace ThreadProject
         /// <param name="gameTime"></param> 
         public override void Update(GameTime gameTime)
         {
-           PositionUpdate();
+            PositionUpdate();
             MouseOnButton();
             mouseState = Mouse.GetState();
 
@@ -142,7 +142,6 @@ namespace ThreadProject
             lock (ob)
             {
                 UI_Manager.woodAmount -= 50;
-                //testLock++;
             }
         }
 
@@ -154,7 +153,6 @@ namespace ThreadProject
         {
             job[0].RemoveObject();
             job[1].RemoveObject();
-            active = false;
             profession = "WoodCutting";
             idle = false;
         }
@@ -216,7 +214,7 @@ namespace ThreadProject
                 }
 
                 //while (position != structure)
-                while(atWorkStructure == false)
+                while (atWorkStructure == false)
                 {
                     Move(structure);
                     distance = Vector2.Distance(position, structure);
@@ -228,7 +226,7 @@ namespace ThreadProject
                             Structure.Enter();
                             structure = new Vector2(250, GameWorld.ScreenSize.Y / 2 + 50);
                         }
-                        else if (profession == "WoodCutting") 
+                        else if (profession == "WoodCutting")
                         {
                             Thread.Sleep(5000);
                             structure = new Vector2(250, GameWorld.ScreenSize.Y / 2 + 50);
@@ -240,7 +238,7 @@ namespace ThreadProject
                 {
                     Move(structure);
                     distance = Vector2.Distance(position, structure);
-                    if (distance <= 10) 
+                    if (distance <= 10)
                     {
                         atTownHall = true;
                         if (profession == "WoodCutting")

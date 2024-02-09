@@ -102,6 +102,10 @@ namespace ThreadProject
             }
         }
 
+        /// <summary>
+        /// Draws the button with text from GameWorld
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             Vector2 fontLength = font.MeasureString(buttonText);
@@ -118,6 +122,9 @@ namespace ThreadProject
             }
         }
 
+        /// <summary>
+        /// Removes button from the game
+        /// </summary>
         public void RemoveObject()
         {
             shouldBeRemoved = true;
