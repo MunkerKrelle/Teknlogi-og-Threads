@@ -3,9 +3,7 @@ using System.Threading;
 using ThreadProject;
     internal class Structure : GameObject
     {
-        /// <summary>
-        /// Statisk variabel til at holde strukturens niveau
-        /// </summary>
+
         static public int level = 1;
 
         /// <summary>
@@ -14,14 +12,14 @@ using ThreadProject;
         static Semaphore MySemaphore = new Semaphore(1, 5);
 
         /// <summary>
-        /// Metode til at simulere indgang i strukturen
+        /// Metode til at simulere indgang i structure
         /// </summary>
         static public void Enter()
         {
             // Venter på at semaphoren er tilgængelig
             MySemaphore.WaitOne();
 
-            // Simulerer aktivitet inde i strukturen
+            
             Thread.Sleep(5000);
 
             // Frigiver semaphoren for at tillade en anden tråd at indtaste
@@ -36,10 +34,10 @@ using ThreadProject;
             
             if (level <= 4)
             {
-                // Frigiver semaphoren, hvilket tillader en anden tråd at indtaste
+                
                 MySemaphore.Release(1);
 
-                // Øger strukturens niveau
+                
                 level++;
             }
             else
